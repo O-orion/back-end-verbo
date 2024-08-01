@@ -15,6 +15,10 @@ class Service {
         return dados;
     }
 
+    async getOneRecordById(id) {
+        return db[this.modelo].findByPk(id);
+    }
+
 }
 
 module.exports = Service;

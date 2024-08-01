@@ -14,6 +14,16 @@ class Controller {
         }
     }
 
+    async getUser(req, res) {
+        const { id } = req.params;
+        try {
+            const oneRegis = await this.entidadeService.getOneRecordById(Number(id))
+            return res.status(200).json(oneRegis)
+        } catch (error) {
+            return res.status(400).json({"error": error})
+        }
+    }
+
     async createNew(req, res) {
         const dadosParaCriacao = req.body;
 
@@ -24,6 +34,10 @@ class Controller {
         } catch (error) {
             return res.status(400).json({"error": "Ocorreu um erro na requisição!"})
         }
+    }
+
+    async updateUser(req, res) {
+
     }
 
 }
