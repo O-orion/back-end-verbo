@@ -56,6 +56,17 @@ class Controller {
         }
     }
 
+    async delete(req, res) {
+        const { id } = req.params;
+
+        try {
+            const result = await this.entidadeService.delete(Number(id))
+            return res.status(200).json({"Sucesso": result})
+        } catch (error) {   
+            return res.status(400).json({"Error": error})
+        }
+    }
+
 }
 
 module.exports = Controller;

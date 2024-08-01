@@ -29,6 +29,18 @@ class Service {
         return registUpdate[0] === 0 ? false: true;
     }
 
+    async delete(id) {
+        const result = db[this.modelo].destroy(
+            {
+                where: {
+                    id: id
+                }
+            }
+        )
+
+        return result;
+    }
+
 }
 
 module.exports = Service;
