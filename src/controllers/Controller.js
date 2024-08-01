@@ -14,7 +14,7 @@ class Controller {
         }
     }
 
-    async getUser(req, res) {
+    async getById(req, res) {
         const { id } = req.params;
         try {
             const oneRegis = await this.entidadeService.getOneRecordById(Number(id))
@@ -24,7 +24,7 @@ class Controller {
         }
     }
 
-    async createNew(req, res) {
+    async create(req, res) {
         const dadosParaCriacao = req.body;
 
         console.log(dadosParaCriacao)
@@ -36,8 +36,24 @@ class Controller {
         }
     }
 
-    async updateUser(req, res) {
+    async update(req, res) {
+        const { id } = req.params;
+        console.log(id)
+        const newData = req.body;
 
+        try {
+            const isUpdate = await this.entidadeService.update(newData, Number(id))
+
+            if (!isUpdate) {
+                return res.status(400).json({"Error": "Ocorreu um erro ao atualizar o registro!"})
+            }
+
+            return res.status(200).json({"Sucesso": "Registro foi atualizado!"})
+        
+        } catch (error) {
+
+            return res.status(400).json({"Error": error})
+        }
     }
 
 }

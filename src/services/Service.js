@@ -19,6 +19,16 @@ class Service {
         return db[this.modelo].findByPk(id);
     }
 
+    async update(newData, id) {
+        const registUpdate = db[this.modelo].update(newData, {
+            where: {
+                id: id
+            }
+        })
+
+        return registUpdate[0] === 0 ? false: true;
+    }
+
 }
 
 module.exports = Service;
