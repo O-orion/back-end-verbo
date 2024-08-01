@@ -1,13 +1,12 @@
-import express from "express";
-import dotenv from 'dotenv';
-import routes from "./routes/index.js";
+const express = require("express");
+const  dotenv = require('dotenv');
+const routes = require("./routes/index.js");
 
 // Carregando variáveis de ambiente
 dotenv.config();
 
 const app = express();
 
-app.use(express.json())
-app.use('/api',routes)
+routes(app)
 
-export default  app;
+module.exports = app;

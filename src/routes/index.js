@@ -1,8 +1,9 @@
-import { Router } from 'express';
-import usuarioRouter from './usuarioRoutes.js'; // Certifique-se de que o caminho está correto
+const express = require('express');
+const usuarioRouter = require('./usuarioRoutes.js'); // Certifique-se de que o caminho está correto
 
-const router =  Router();
 
-router.use('/usuario', usuarioRouter)
-
-export default router;
+module.exports = app => {
+    app.use(express.json(), 
+    usuarioRouter
+    );
+};

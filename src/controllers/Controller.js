@@ -14,9 +14,10 @@ class Controller {
         }
     }
 
-    async creatNew(req, res) {
+    async createNew(req, res) {
         const dadosParaCriacao = req.body;
 
+        console.log(dadosParaCriacao)
         try {
             const novoRegistro = await this.entidadeService.createRegistry(dadosParaCriacao);
             return res.status(200).json(novoRegistro)
@@ -27,4 +28,4 @@ class Controller {
 
 }
 
-export default Controller;
+module.exports = Controller;
