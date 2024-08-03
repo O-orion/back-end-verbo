@@ -32,7 +32,9 @@ class Controller {
             const novoRegistro = await this.entidadeService.createRegistry(dadosParaCriacao);
             return res.status(200).json(novoRegistro)
         } catch (error) {
-            return res.status(400).json({"error": "Ocorreu um erro na requisição!"})
+            console.log(error.errors)
+
+            return res.status(400).json({"error": error.message})
         }
     }
 
@@ -52,7 +54,7 @@ class Controller {
         
         } catch (error) {
 
-            return res.status(400).json({"Error": error})
+            return res.status(400).json({"Error": error.message})
         }
     }
 

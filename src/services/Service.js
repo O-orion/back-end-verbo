@@ -10,9 +10,13 @@ class Service {
     }
 
     async createRegistry(dadosDoRegistro) {
-        console.log(dadosDoRegistro)
-        let dados = db[this.modelo].create(dadosDoRegistro);
-        return dados;
+        try {
+            let dados = db[this.modelo].create(dadosDoRegistro);
+            return dados;
+        } catch (error) {
+            console.log(error)
+            throw new Error(error.errors.map(e => e.message).join(", "))
+        }
     }
 
     async getOneRecordById(id) {
@@ -20,13 +24,24 @@ class Service {
     }
 
     async update(newData, id) {
-        const registUpdate = db[this.modelo].update(newData, {
-            where: {
-                id: id
-            }
-        })
+        try {
+            const registro = this.getOneRecordById(id);
 
-        return registUpdate[0] === 0 ? false: true;
+            if(!registro) {
+                throw new Error("Registro não encontrado.");
+            }
+
+            const registUpdate = db[this.modelo].update(newData, {
+                where: {
+                    id: id
+                }
+            })
+    
+            return registUpdate[0] === 0 ? false: true;
+            
+        } catch (error) {
+            throw new Error(error.errors.map(e => e.message).join(", "))
+        }
     }
 
     async delete(id) {
