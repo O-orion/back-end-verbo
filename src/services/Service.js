@@ -11,7 +11,7 @@ class Service {
 
     async createRegistry(dadosDoRegistro) {
         try {
-            let dados = db[this.modelo].create(dadosDoRegistro);
+            let dados = await db[this.modelo].create(dadosDoRegistro);
             return dados;
         } catch (error) {
             throw new Error(error.errors.map(e => e.message).join(", "))
@@ -24,13 +24,13 @@ class Service {
 
     async update(newData, id) {
         try {
-            const registro = this.getOneRecordById(id);
-
+            const registro =  await this.getOneRecordById(id);
+    
             if(!registro) {
                 throw new Error("Registro não encontrado.");
             }
 
-            const registUpdate = db[this.modelo].update(newData, {
+            const registUpdate = await db[this.modelo].update(newData, {
                 where: {
                     id: id
                 }

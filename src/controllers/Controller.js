@@ -27,12 +27,12 @@ class Controller {
     async create(req, res) {
         const dadosParaCriacao = req.body;
 
-        console.log(dadosParaCriacao)
+       
         try {
             const novoRegistro = await this.entidadeService.createRegistry(dadosParaCriacao);
             return res.status(200).json(novoRegistro)
         } catch (error) {
-            console.log(error.errors)
+         
 
             return res.status(400).json({"error": error.message})
         }
@@ -40,12 +40,12 @@ class Controller {
 
     async update(req, res) {
         const { id } = req.params;
-        console.log(id)
         const newData = req.body;
 
         try {
             const isUpdate = await this.entidadeService.update(newData, Number(id))
 
+            console.log("validado: " + !isUpdate)
             if (!isUpdate) {
                 return res.status(400).json({"Error": "Ocorreu um erro ao atualizar o registro!"})
             }
