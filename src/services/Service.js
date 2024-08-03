@@ -14,7 +14,6 @@ class Service {
             let dados = db[this.modelo].create(dadosDoRegistro);
             return dados;
         } catch (error) {
-            console.log(error)
             throw new Error(error.errors.map(e => e.message).join(", "))
         }
     }
