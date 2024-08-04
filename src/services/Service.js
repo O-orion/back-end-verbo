@@ -3,6 +3,7 @@ const db = require('../database/models/index.js');
 class Service {
     constructor(nomeModelo) {
         this.modelo = nomeModelo;
+        this.db = db;
     }
 
     async getAll() {

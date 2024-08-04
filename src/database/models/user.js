@@ -87,6 +87,13 @@ module.exports = (sequelize, DataTypes) => {
       attributes: {
         exclude: ['passwordHash']
       }
+    },
+    scopes: {
+      withPassword: {
+        attributes: {
+          include: ['passwordHash']
+        }
+      }
     }
     
   });

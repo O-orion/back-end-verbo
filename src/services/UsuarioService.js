@@ -25,6 +25,16 @@ class UsuarioService extends Service {
         const salt = await bcrypt.genSalt(10);
         return await bcrypt.hash(password, salt)
     }
+
+    async userByEmail(email) {
+        const usuario = await this.db['User'].scope('withPassword').findOne({
+            where: {
+                email: email
+            }
+        })
+
+        return usuario;
+    }
 }
 
 module.exports = UsuarioService;
